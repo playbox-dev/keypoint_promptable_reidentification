@@ -25,13 +25,7 @@ def numpy_include():
     return numpy_include
 
 
-ext_modules = [
-    Extension(
-        'torchreid.metrics.rank_cylib.rank_cy',
-        ['torchreid/metrics/rank_cylib/rank_cy.pyx'],
-        include_dirs=[numpy_include()],
-    )
-]
+ext_modules = []
 
 
 def get_requirements(filename='requirements.txt'):

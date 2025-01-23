@@ -319,7 +319,11 @@ def compute_model_complexity(
     default_train_mode = model.training
 
     model.eval().apply(_add_hooks)
-    input_size = (1, 3, cfg.data.height, cfg.data.width)
+    if isinstance(cfg, tuple):
+        height, width = cfg[2], cfg[3]  # タプルの3番目と4番目の要素を使用
+        input_size = (1, 3, height, width)
+    else:
+        input_size = (1, 3, cfg.data.height, cfg.data.width)
     input_img = torch.rand(input_size)
     if next(model.parameters()).is_cuda:
         input_img = input_img.cuda()
